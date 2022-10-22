@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using HarmonyLib;
@@ -38,7 +38,7 @@ namespace Reactor.Patches
                 textBox.outputText.fontSize = 4f;
                 
                 textBox.OnChange.AddListener((Action) (() => {
-                    SaveManager.PlayerName = textBox.text;
+                    AmongUs.Data.DataManager.Player.Customization.Name = textBox.text;
                 }));
                 textBox.OnEnter = textBox.OnFocusLost = textBox.OnChange;
                 

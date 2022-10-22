@@ -1,5 +1,6 @@
 using System.Reflection;
 using HarmonyLib;
+using static EOSManager;
 
 namespace Reactor.Patches
 {
@@ -31,12 +32,13 @@ namespace Reactor.Patches
         }
 
         // EpicManager calls SaveManager.LoadPlayerPrefs(true) both on successful and unsuccessful EOS login
-        [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.LoadPlayerPrefs))]
+        [HarmonyPatch(typeof(AmongUs.Data.Player.PlayerAccountData), nameof(AmongUs.Data.Player.PlayerAccountData.LoginStatus), MethodType.Setter)]
         private static class LoadPlayerPrefsPatch
         {
-            private static void Postfix(bool overrideLoad)
+            private static void Prefix(AccountLoginStatus value)
             {
-                if (overrideLoad) _loginFinished = true;
+                if (value == AccountLoginStatus.LoggedIn) _loginFinished = true;
+
             }
         }
     }

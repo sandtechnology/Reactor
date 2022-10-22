@@ -6,7 +6,7 @@ namespace Reactor.Patches
 {
     internal static class BetterGuestPatch
     {
-        [HarmonyPatch(typeof(SaveManager), nameof(SaveManager.ChatModeType), MethodType.Getter)]
+        [HarmonyPatch(typeof(AmongUs.Data.Settings.MultiplayerSettingsData), nameof(AmongUs.Data.Settings.MultiplayerSettingsData.ChatMode), MethodType.Getter)]
         public static class ChatModeTypePatch
         {
             public static bool Prefix(out QuickChatModes __result)
